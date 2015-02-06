@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.0 - TBA
+
+- Add options to disable days, see #171
+
+## 1.3.1 - 2015-02-04
+
+- Fix for bug introduced in #166; fixes #224, #230
+
 ## 1.3.0 - 2015-01-09
 
 - Fix #79 moving through months can cause calendar to "bounce around"
