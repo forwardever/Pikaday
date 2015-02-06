@@ -266,7 +266,7 @@
         return abbr ? opts.i18n.weekdaysShort[day] : opts.i18n.weekdays[day];
     },
 
-    renderDay = function(d, m, y, isSelected, isToday, isDisabled, isEmpty)
+    renderDay = function(d, m, y, isSelected, isToday, isDisabled, isEmpty, customClass)
     {
         if (isEmpty) {
             return '<td class="is-empty"></td>';
@@ -280,6 +280,9 @@
         }
         if (isSelected) {
             arr.push('is-selected');
+        }
+        if (customClass) {
+            arr.push(customClass);
         }
         return '<td data-day="' + d + '" class="' + arr.join(' ') + '">' +
                  '<button class="pika-button pika-day" type="button" ' +
@@ -601,6 +604,8 @@
             opts.disableWeekends = !!opts.disableWeekends;
 
             opts.disableDayFn = (typeof opts.disableDayFn) == "function" ? opts.disableDayFn : null;
+
+            opts.customClassFn = (typeof opts.customClassFn) == "function" ? opts.customClassFn : null;
 
             var nom = parseInt(opts.numberOfMonths, 10) || 1;
             opts.numberOfMonths = nom > 4 ? 4 : nom;
@@ -948,9 +953,10 @@
                     isDisabled = (opts.minDate && day < opts.minDate) ||
                                  (opts.maxDate && day > opts.maxDate) ||
                                  (opts.disableWeekends && isWeekend(day)) ||
-                                 (opts.disableDayFn && opts.disableDayFn(day));
+                                 (opts.disableDayFn && opts.disableDayFn(day)),
+                    customClass = opts.customClassFn ? opts.customClassFn(day) : false;
 
-                row.push(renderDay(1 + (i - before), month, year, isSelected, isToday, isDisabled, isEmpty));
+                row.push(renderDay(1 + (i - before), month, year, isSelected, isToday, isDisabled, isEmpty, customClass));
 
                 if (++r === 7) {
                     if (opts.showWeekNumber) {

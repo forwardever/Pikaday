@@ -199,4 +199,6 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     border-bottom: none;
     cursor: help;
 }
-
+.my-individual-class .pika-button {
+    background: #0E0;
+}
